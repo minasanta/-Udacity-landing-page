@@ -50,6 +50,10 @@ function createNavLinks()
         link.textContent = section.dataset.nav;
         link.className = "menu__link";
         link.href = `#${section.id}`;
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            section.scrollIntoView({behavior: "smooth"});
+        });
         list.appendChild(link);
     });
     navBar.appendChild(fragment);
@@ -86,6 +90,16 @@ window.onscroll = () => {
         if (rect.top >= -150 && rect.top <= 400)
         {
             section.className = 'your-active-class';
+            links.forEach((link)=> {
+                if (link.textContent === section.dataset.nav) 
+                {
+                    link.style.backgroundColor = '#7f62a9';
+                }
+                else
+                {
+                    link.removeAttribute("style");
+                }
+            });
         }
         else 
         {
